@@ -1,5 +1,6 @@
 <script setup>
 defineProps({
+  id: String,
   imageUrl: String,
   title: String,
   price: Number,
