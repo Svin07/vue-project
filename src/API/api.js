@@ -14,6 +14,7 @@ async function fetchSneakers() {
 
 async function fetchSneakersbyId(id) {
   try {
+    console.log(id)
     const { data } = await axios.get(`${BASE_URL}/${id}`)
 
     return data

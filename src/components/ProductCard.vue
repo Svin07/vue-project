@@ -22,7 +22,7 @@ defineProps({
         alt="Like"
         class="absolute top-8 left-8"
       />
-      <img :src="imageUrl" alt="{{title}}" />
+      <img :src="imageUrl" :alt="title" />
       <p class="mt-2">{{ title }}</p>
       <div class="flex justify-between">
         <div class="flex flex-col">

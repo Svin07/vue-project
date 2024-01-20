@@ -11,16 +11,25 @@ import {
   updatedIsAdded
 } from './API/api'
 
-// import DrawerBar from './components/DrawerBar.vue'
+import DrawerBar from './components/DrawerBar.vue'
 
 const items = ref([])
+const drawerOpen = ref(false)
 const isFavorite = ref(false)
 const isAdded = ref(false)
+const totalPrice = ref(0)
 
 const filters = reactive({
   sortBy: 'id',
   searchQuery: ''
 })
+
+const calculateTotalPrice = (arr) => {
+  totalPrice.value = arr.reduce((acc, item) => {
+    acc + item.price
+  }, 0)
+  console.log(totalPrice.value)
+}
 
 const onChangeSelect = (evt) => {
   filters.sortBy = evt.target.value
@@ -33,6 +42,17 @@ const onChangeSearchInput = (evt) => {
 onMounted(async () => {
   items.value = await fetchSneakers()
 })
+
+const deletedFromCartandUpdate = async (deletedItem) => {
+  const data = await fetchSneakersbyId(deletedItem.id)
+
+  const item = items.value.find((item) => item.id === deletedItem.id)
+
+  isAdded.value = !data.isAdded
+  item.isAdded = isAdded.value
+
+  await updatedIsAdded(item.id, isAdded.value)
+}
 
 const onClickAdd = async (item) => {
   const data = await fetchSneakersbyId(item.id)
@@ -50,6 +70,10 @@ const onClickFavorite = async (item) => {
   await updatedFavorites(item.id, isFavorite.value)
 }
 
+const toggleDrawer = () => {
+  drawerOpen.value = !drawerOpen.value
+}
+
 watch(filters, async () => {
   const params = {
     sortBy: filters.sortBy
@@ -64,9 +88,14 @@ watch(filters, async () => {
 </script>
 
 <template>
-  <!-- <DrawerBar /> -->
+  <DrawerBar
+    v-if="drawerOpen"
+    @toggle-drawer="toggleDrawer"
+    @deletedFromCartandUpdate="deletedFromCartandUpdate"
+    @calculateTotalPrice="calculateTotalPrice"
+  />
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
-    <PageHeader />
+    <PageHeader @toggle-drawer="toggleDrawer" :totalPrice="totalPrice" />
 
     <div class="p-10">
       <div class="flex justify-between items-center mb-10">
