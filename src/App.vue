@@ -17,19 +17,11 @@ const items = ref([])
 const drawerOpen = ref(false)
 const isFavorite = ref(false)
 const isAdded = ref(false)
-const totalPrice = ref(0)
 
 const filters = reactive({
   sortBy: 'id',
   searchQuery: ''
 })
-
-const calculateTotalPrice = (arr) => {
-  totalPrice.value = arr.reduce((acc, item) => {
-    acc + item.price
-  }, 0)
-  console.log(totalPrice.value)
-}
 
 const onChangeSelect = (evt) => {
   filters.sortBy = evt.target.value
@@ -92,10 +84,9 @@ watch(filters, async () => {
     v-if="drawerOpen"
     @toggle-drawer="toggleDrawer"
     @deletedFromCartandUpdate="deletedFromCartandUpdate"
-    @calculateTotalPrice="calculateTotalPrice"
   />
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
-    <PageHeader @toggle-drawer="toggleDrawer" :totalPrice="totalPrice" />
+    <PageHeader @toggle-drawer="toggleDrawer" />
 
     <div class="p-10">
       <div class="flex justify-between items-center mb-10">

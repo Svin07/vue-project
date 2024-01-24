@@ -1,9 +1,7 @@
 <script setup>
 const emit = defineEmits(['toggleDrawer'])
 
-defineProps({
-  totalPrice: Number
-})
+defineProps({})
 </script>
 
 <template>
@@ -21,7 +19,7 @@ defineProps({
         class="flex items-center cursor-pointer gap-3 text-gray-500 hover:text-black"
       >
         <img src="/cart.svg" alt="Cart" />
-        <b>{{ totalPrice }} грн.</b>
+        <b>Кошик</b>
       </li>
       <li class="flex items-center cursor-pointer gap-3 text-gray-500 hover:text-black">
         <img src="/heart.svg" alt="Heart" />
