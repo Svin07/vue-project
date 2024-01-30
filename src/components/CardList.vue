@@ -1,14 +1,17 @@
 <script setup>
+import { inject } from 'vue'
 import ProductCard from './ProductCard.vue'
 
 defineProps({
   items: Array
 })
 
-const emit = defineEmits(['onClickFavorite', 'onClickAdd'])
+const emit = defineEmits(['onClickFavorite'])
+
+const onClickAdd = inject('onClickAdd')
 </script>
 <template>
-  <div class="grid grid-cols-4 gap-5">
+  <div class="grid grid-cols-4 gap-5" v-auto-animate>
     <ProductCard
       v-for="item in items"
       :key="item.id"
@@ -18,12 +21,12 @@ const emit = defineEmits(['onClickFavorite', 'onClickAdd'])
       :price="item.price"
       :isAdded="item.isAdded"
       :isFavorite="item.favorite"
-      :onClickAdd="() => emit('onClickAdd', item)"
-      :onClickFavorite="
+      :onClickAdd="
         () => {
-          emit('onClickFavorite', item)
+          onClickAdd(item)
         }
       "
+      :on-click-favorite="() => emit('onClickFavorite', item)"
     />
   </div>
 </template>
