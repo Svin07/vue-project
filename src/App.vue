@@ -12,15 +12,15 @@ const drawerOpen = ref(false)
 const isAdded = ref(false)
 const countItemsInCart = ref(0)
 
+const body = document.body
+
 onMounted(async () => {
   items.value = await fetchSneakers()
   countItemsInCart.value = items.value.filter((value) => value.isAdded === true).length
-  console.log(countItemsInCart.value)
 })
 
 onUpdated(() => {
   countItemsInCart.value = items.value.filter((value) => value.isAdded === true).length
-  console.log(countItemsInCart.value)
 })
 
 const onClickAdd = async (item) => {
@@ -33,10 +33,11 @@ const onClickAdd = async (item) => {
   items.value = newProducts
 }
 
-// watch(onClickAdd, () => {})
-
 const toggleDrawer = () => {
+  //вмикаємо-вимикаємо модалку(корзину)
   drawerOpen.value = !drawerOpen.value
+  //вмикаємо-вимикаємо скролл головної сторінки на момент відкриття модлки(корзини)
+  drawerOpen.value ? body.classList.add('disable-scroll') : body.classList.remove('disable-scroll')
 }
 
 provide('onClickAdd', onClickAdd)
@@ -50,7 +51,6 @@ provide('toggleDrawer', toggleDrawer)
 
     <div class="p-10">
       <router-view></router-view>
-      <!-- <Home :products="items" /> -->
     </div>
   </div>
 </template>
