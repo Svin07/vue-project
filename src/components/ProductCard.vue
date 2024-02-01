@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   id: String,
   imageUrl: String,
   title: String,
@@ -22,7 +22,8 @@ defineProps({
         alt="Like"
         class="absolute top-8 left-8"
       />
-      <img :src="imageUrl" :alt="title" />
+      <router-link :to="`/product/${props.id} `"><img :src="imageUrl" :alt="title" /></router-link>
+
       <p class="mt-2">{{ title }}</p>
       <div class="flex justify-between">
         <div class="flex flex-col">

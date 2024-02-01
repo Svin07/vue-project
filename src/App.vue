@@ -6,21 +6,22 @@ import PageHeader from './components/PageHeader.vue'
 import { fetchSneakers, fetchSneakersbyId, updatedIsAdded } from './API/api'
 
 import DrawerBar from './components/DrawerBar.vue'
+import SliderBar from './components/SliderBar.vue'
 
 const items = ref([])
 const drawerOpen = ref(false)
 const isAdded = ref(false)
 const countItemsInCart = ref(0)
 
+const body = document.body
+
 onMounted(async () => {
   items.value = await fetchSneakers()
   countItemsInCart.value = items.value.filter((value) => value.isAdded === true).length
-  console.log(countItemsInCart.value)
 })
 
 onUpdated(() => {
   countItemsInCart.value = items.value.filter((value) => value.isAdded === true).length
-  console.log(countItemsInCart.value)
 })
 
 const onClickAdd = async (item) => {
@@ -33,10 +34,11 @@ const onClickAdd = async (item) => {
   items.value = newProducts
 }
 
-// watch(onClickAdd, () => {})
-
 const toggleDrawer = () => {
+  //вмикаємо-вимикаємо модалку(корзину)
   drawerOpen.value = !drawerOpen.value
+  //вмикаємо-вимикаємо скролл головної сторінки на момент відкриття модлки(корзини)
+  drawerOpen.value ? body.classList.add('disable-scroll') : body.classList.remove('disable-scroll')
 }
 
 provide('onClickAdd', onClickAdd)
@@ -47,10 +49,10 @@ provide('toggleDrawer', toggleDrawer)
   <DrawerBar v-if="drawerOpen" />
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
     <PageHeader :countItemsInCart="countItemsInCart" />
+    <SliderBar />
 
     <div class="p-10">
       <router-view></router-view>
-      <!-- <Home :products="items" /> -->
     </div>
   </div>
 </template>
