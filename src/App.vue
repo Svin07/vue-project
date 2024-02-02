@@ -6,7 +6,6 @@ import PageHeader from './components/PageHeader.vue'
 import { fetchSneakers, fetchSneakersbyId, updatedIsAdded } from './API/api'
 
 import DrawerBar from './components/DrawerBar.vue'
-import SliderBar from './components/SliderBar.vue'
 
 const items = ref([])
 const drawerOpen = ref(false)
@@ -49,7 +48,6 @@ provide('toggleDrawer', toggleDrawer)
   <DrawerBar v-if="drawerOpen" />
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
     <PageHeader :countItemsInCart="countItemsInCart" />
-    <SliderBar />
 
     <div class="p-10">
       <router-view></router-view>

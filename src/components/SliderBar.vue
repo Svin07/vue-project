@@ -1,40 +1,107 @@
-<script></script>
+<script>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules'
+
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  setup() {
+    const onSwiper = (swiper) => {
+      console.log(swiper)
+    }
+    const onSlideChange = () => {
+      console.log('slide change')
+    }
+    return {
+      onSwiper,
+      onSlideChange,
+      modules: [Navigation, Pagination, Scrollbar]
+    }
+  }
+}
+</script>
 
 <template>
-  <!-- Разметка слайдера (html код) -->
-  <div class="itcss">
-    <div class="itcss__wrapper">
-      <div class="itcss__items">
-        <div class="itcss__item">
-          <!-- Контент 1 слайда -->
-        </div>
-        <div class="itcss__item">
-          <!-- Контент 2 слайда -->
-        </div>
-        <div class="itcss__item">
-          <!-- Контент 3 слайда -->
-        </div>
-        <div class="itcss__item">
-          <!-- Контент 4 слайда -->
-        </div>
+  <swiper
+    :modules="modules"
+    :slides-per-view="1"
+    :space-between="50"
+    navigation
+    :pagination="{ clickable: true }"
+    :scrollbar="{ draggable: true }"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+    <swiper-slide class="image-slider__slide swiper-slide"
+      ><div class="image-slider__image">
+        <img src="/sneakers/slider_1eebe349312ced27-min.jpg" alt="photo-1" />
       </div>
-    </div>
-    <!-- Стрелки для перехода к предыдущему и следующему слайду -->
-    <a class="itcss__control itcss__control_prev" href="#" role="button" data-slide="prev"></a>
-    <a class="itcss__control itcss__control_next" href="#" role="button" data-slide="next"></a>
-  </div>
+    </swiper-slide>
+    <swiper-slide class="image-slider__slide swiper-slide"
+      ><div class="image-slider__image">
+        <img src="/sneakers/slider_3a1b6f166119ea1d29f-min.jpg" alt="photo-2" />
+      </div>
+    </swiper-slide>
+    <swiper-slide class="image-slider__slide swiper-slide"
+      ><div class="image-slider__image">
+        <img src="/sneakers/slider_bef6ec9c94ce17c1a79a-min.jpg" alt="photo-3" />
+      </div>
+    </swiper-slide>
+    <swiper-slide class="image-slider__slide swiper-slide"
+      ><div class="image-slider__image">
+        <img src="/sneakers/slider_valentines_d5773-min.jpeg" alt="photo-4" />
+      </div>
+    </swiper-slide>
+  </swiper>
 </template>
 
-<style lang="scss" scoped>
-@import '../assets/main.css';
-
-.swiper-slide {
-  width: 80%;
-}
-.swiper-slide:nth-child(2n) {
-  width: 60%;
-}
-.swiper-slide:nth-child(3n) {
-  width: 40%;
+<style scoped>
+.swiper {
+  margin-bottom: 40px;
+  background-color: #d0dace;
+  max-width: 980px;
+  height: 400px;
 }
 </style>
+
+<!-- <swiper
+    class="image-slider swiper-container"
+    :modules="modules"
+    :slides-per-view="1"
+    :space-between="50"
+    navigation
+    :pagination="{ clickable: true }"
+    :scrollbar="{ draggable: true }"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+    ><div class="image-slider__wraper swiper-wraper">
+      <swiper-slide class="image-slider__slide swiper-slide"
+        ><div class="image-slider__image">
+          <img src="/sneakers/slider_1eebe349312ced27-min.jpg" alt="photo-1" />
+        </div>
+      </swiper-slide>
+      <swiper-slide class="image-slider__slide swiper-slide"
+        ><div class="image-slider__image">
+          <img src="/sneakers/slider_3a1b6f166119ea1d29f-min.jpg" alt="photo-2" />
+        </div>
+      </swiper-slide>
+      <swiper-slide class="image-slider__slide swiper-slide"
+        ><div class="image-slider__image">
+          <img src="/sneakers/slider_bef6ec9c94ce17c1a79a-min.jpg" alt="photo-3" />
+        </div>
+      </swiper-slide>
+      <swiper-slide class="image-slider__slide swiper-slide"
+        ><div class="image-slider__image">
+          <img src="/sneakers/slider_valentines_d5773-min.jpeg" alt="photo-4" />
+        </div>
+      </swiper-slide>
+    </div>
+  </swiper> -->

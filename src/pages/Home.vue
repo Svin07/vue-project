@@ -6,6 +6,7 @@ import debounce from 'lodash.debounce'
 import { onMounted, reactive, ref, watch } from 'vue'
 
 import CardList from '../components/CardList.vue'
+import SliderBar from '../components/SliderBar.vue'
 import { fetchSneakersSortBy, updatedFavorites, fetchSneakersbyId, fetchSneakers } from '../API/api'
 
 // const props = defineProps({
@@ -59,6 +60,7 @@ watch(filters, async () => {
 </script>
 
 <template>
+  <SliderBar />
   <div class="flex justify-between items-center mb-10">
     <h2 class="text-3xl font-bold">Усі кросівки</h2>
 

@@ -14,9 +14,8 @@
     "@formkit/auto-animate": "^0.8.1",
     "axios": "^1.6.5",
     "lodash.debounce": "^4.0.8",
-    "swiper": "^8.4.7",
+    "swiper": "^11.0.5",
     "vue": "^3.3.11",
-    "vue-awesome-swiper": "^5.0.1",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
