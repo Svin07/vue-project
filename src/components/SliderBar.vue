@@ -1,12 +1,9 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 
 // Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
+import 'swiper/css/bundle'
 
 export default {
   components: {
@@ -14,16 +11,8 @@ export default {
     SwiperSlide
   },
   setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper)
-    }
-    const onSlideChange = () => {
-      console.log('slide change')
-    }
     return {
-      onSwiper,
-      onSlideChange,
-      modules: [Navigation, Pagination, Scrollbar]
+      modules: [Autoplay, Navigation, Pagination]
     }
   }
 }
@@ -31,14 +20,23 @@ export default {
 
 <template>
   <swiper
+    :style="{
+      '--swiper-navigation-color': '#fff',
+      '--swiper-pagination-color': '#fff',
+      '--swiper-pagination-bullet-width': '15px',
+      '--swiper-pagination-bullet-height': '15px'
+    }"
     :modules="modules"
     :slides-per-view="1"
     :space-between="50"
-    navigation
-    :pagination="{ clickable: true }"
-    :scrollbar="{ draggable: true }"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
+    :pagination="{
+      clickable: true
+    }"
+    :navigation="true"
+    :autoplay="{
+      delay: 2500,
+      disableOnInteraction: false
+    }"
   >
     <swiper-slide class="image-slider__slide swiper-slide"
       ><div class="image-slider__image">
@@ -60,6 +58,8 @@ export default {
         <img src="/sneakers/slider_valentines_d5773-min.jpeg" alt="photo-4" />
       </div>
     </swiper-slide>
+    <!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
   </swiper>
 </template>
 
