@@ -16,6 +16,13 @@ const product = ref({})
 onMounted(async () => {
   product.value = await fetchSneakersbyId(productId)
 })
+
+const addToCart = () => {
+  if (product.value.isAdded) {
+    return
+  }
+  onClickAdd(product.value)
+}
 </script>
 
 <template>
@@ -23,11 +30,11 @@ onMounted(async () => {
     ><button class="bg-lime-500 p-1 rounded-md hover:bg-lime-600 mb-4">Go back</button></router-link
   >
 
-  <div class="grid grid-cols-3 gap-8 mb-4">
-    <img class="" :src="product.imageUrl" :alt="product.title" />
+  <div class="grid grid-cols-3 gap-8 justify-items-center mb-4">
+    <img class="self-center" :src="product.imageUrl" :alt="product.title" />
     <div class="flex flex-col gap-8">
       <h2 class="text-xl font-semibold text-center">{{ product.title }}</h2>
-      <h3 class="max-w-68 text-center">
+      <h3 class="max-w-68">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio ex ut optio explicabo
         temporibus necessitatibus suscipit saepe ea error? Ipsam natus doloribus at obcaecati beatae
         ducimus consequuntur atque quam ut. Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -36,14 +43,11 @@ onMounted(async () => {
       </h3>
       <p class="text-lg"><span class="font-semibold">Ціна:</span> {{ product.price }} грн</p>
       <button
-        @click="
-          () => {
-            onClickAdd(product)
-          }
-        "
+        @click="addToCart"
         class="transition bg-lime-500 w-full rounded-xl py-3 text-white disabled:bg-slate-300 hover:bg-lime-600 active:bg-lime-700 cursor-pointer"
       >
-        Додати до кошика
+        <p v-if="product.isAdded">Товар вже в кошику</p>
+        <p v-else>Додати до кошика</p>
       </button>
     </div>
     <div class="w-50">

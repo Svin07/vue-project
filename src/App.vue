@@ -11,6 +11,7 @@ const items = ref([])
 const drawerOpen = ref(false)
 const isAdded = ref(false)
 const countItemsInCart = ref(0)
+const orderItems = ref({})
 
 const body = document.body
 
@@ -40,8 +41,14 @@ const toggleDrawer = () => {
   drawerOpen.value ? body.classList.add('disable-scroll') : body.classList.remove('disable-scroll')
 }
 
+const createOrderPage = (order) => {
+  orderItems.value = order
+}
+
 provide('onClickAdd', onClickAdd)
 provide('toggleDrawer', toggleDrawer)
+provide('createOrderPage', createOrderPage)
+provide('orderItems', orderItems)
 </script>
 
 <template>

@@ -62,11 +62,22 @@ async function createOrder(obj) {
   }
 }
 
+async function fetchOrders() {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/orders`)
+
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export {
   fetchSneakers,
   fetchSneakersSortBy,
   updatedFavorites,
   fetchSneakersbyId,
   updatedIsAdded,
-  createOrder
+  createOrder,
+  fetchOrders
 }

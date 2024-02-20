@@ -5,6 +5,8 @@ import DrawerBarHead from './DrawerBarHead.vue'
 import CartItemList from './CartItemList.vue'
 import InfoBlock from './InfoBlock.vue'
 
+const createOrderPage = inject('createOrderPage')
+const toggleDrawer = inject('toggleDrawer')
 const onClickAdd = inject('onClickAdd')
 
 const cartItems = ref([])
@@ -31,14 +33,17 @@ const onClickCreateOrder = async () => {
 
   const result = await createOrder(order)
 
+  console.log(result)
+
   await result.cart.map((item) => {
     const deletedItem = { id: item.id }
 
     onClickAdd(deletedItem)
+    createOrderPage(result)
   })
 
   orderId.value = result.id
-  console.log(order.value)
+  console.log(orderId.value)
 
   cartItems.value = []
   totalPrice.value = 0
@@ -72,12 +77,12 @@ const onClickClose = async (id) => {
         description="Додайте в кошик хоча б один товар, щоб зробити замовлення"
       />
 
-      <InfoBlock
+      <!-- <InfoBlock
         v-if="orderId"
         imgUrl="/order-success-icon.png"
         title="Замовлення створене!"
         :description="`Ваше замовлення №${orderId} незабаром буде передано до служби доставки`"
-      />
+      /> -->
     </div>
 
     <CartItemList v-if="totalPrice" :cartItems="cartItems" @on-click-close="onClickClose" />
@@ -94,12 +99,14 @@ const onClickClose = async (id) => {
         <b>{{ totalTax }} грн</b>
       </div>
     </div>
-    <button
-      v-if="totalPrice"
-      @click="onClickCreateOrder()"
-      class="transition bg-lime-500 w-full rounded-xl py-3 text-white disabled:bg-slate-300 hover:bg-lime-600 active:bg-lime-700 cursor-pointer"
-    >
-      Оформити замовлення
-    </button>
+    <router-link to="/toorder">
+      <button
+        v-if="totalPrice"
+        @click="onClickCreateOrder(), toggleDrawer()"
+        class="transition bg-lime-500 w-full rounded-xl py-3 text-white disabled:bg-slate-300 hover:bg-lime-600 active:bg-lime-700 cursor-pointer"
+      >
+        Оформити замовлення
+      </button>
+    </router-link>
   </div>
 </template>
