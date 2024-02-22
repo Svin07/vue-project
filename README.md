@@ -1,35 +1,7 @@
-# vue-project
+An example of an online sneaker store. It consists of 3 pages: home page, preferences and checkout. Also, the basket is designed in the form of a modal window. The main page features product filters by price, name, and product name search.
 
-This template should help get you started developing with Vue 3 in Vite.
+When you click on the photo of the product, a page with a detailed description of the product opens.
+On the main page, an autoslider displays advertising information about products or promotions.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+The shopping cart displays the total amount of the order and the tax percentage (for example).
+The site is connected to the educational backend https://mockapi.io/, therefore, unfortunately, not all functions work adequately.

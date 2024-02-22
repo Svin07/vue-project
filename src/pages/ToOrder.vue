@@ -44,7 +44,6 @@ const handlyButton = () => {
     title="Замовлення створене!"
     :description="`Ваше замовлення №${orderId} незабаром буде передано до служби доставки`"
   />
-  :
 
   <div v-if="orderTotalPrice">
     <h4 class="font-light text-sm leading-6 tracking-wide mb-4">
