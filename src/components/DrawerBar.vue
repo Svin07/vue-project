@@ -5,7 +5,6 @@ import DrawerBarHead from './DrawerBarHead.vue'
 import CartItemList from './CartItemList.vue'
 import InfoBlock from './InfoBlock.vue'
 
-const createOrderPage = inject('createOrderPage')
 const toggleDrawer = inject('toggleDrawer')
 const onClickAdd = inject('onClickAdd')
 
@@ -33,17 +32,13 @@ const onClickCreateOrder = async () => {
 
   const result = await createOrder(order)
 
-  console.log(result)
-
   await result.cart.map((item) => {
     const deletedItem = { id: item.id }
 
     onClickAdd(deletedItem)
-    createOrderPage(result)
   })
 
   orderId.value = result.id
-  console.log(orderId.value)
 
   cartItems.value = []
   totalPrice.value = 0
@@ -76,13 +71,6 @@ const onClickClose = async (id) => {
         title="Кошик пустий"
         description="Додайте в кошик хоча б один товар, щоб зробити замовлення"
       />
-
-      <!-- <InfoBlock
-        v-if="orderId"
-        imgUrl="/order-success-icon.png"
-        title="Замовлення створене!"
-        :description="`Ваше замовлення №${orderId} незабаром буде передано до служби доставки`"
-      /> -->
     </div>
 
     <CartItemList v-if="totalPrice" :cartItems="cartItems" @on-click-close="onClickClose" />
